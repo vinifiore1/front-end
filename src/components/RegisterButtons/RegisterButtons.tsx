@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { ButtonSecondary } from "../../components/ButtonSecondary/ButtonSecondary";
 import { ButtonContainer } from "./styles";
 
@@ -21,14 +20,14 @@ const RegisterButtons = (props: IPropsRegisterButtons) => {
         onClick={() => handleRegisterPF()}
         disabled={!props.active}
         id="button-register-pf"
-        label="Pessoa Física"
+        label="Cliente"
       />
 
       <ButtonSecondary
         onClick={() => handleRegisterPJ()}
         disabled={props.active}
         id="button-register-pj"
-        label="Pessoa Jurídica"
+        label="Profissional"
       />
     </ButtonContainer>
   );

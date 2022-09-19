@@ -6,7 +6,7 @@ import { ContainerInputs, ContainerPassword } from "../styles/styles";
 import { HiddePass } from "../../../img/HiddePass";
 import { ShowPass } from "../../../img/ShowPass";
 import { useState } from "react";
-import { IRegisterClient } from "../styles/interface";
+import { IRegisterClient } from "../interface";
 import { maskBornDate, maskCpf, maskPhone } from "../../../utils/mask";
 import { connect } from "../../../api/connect";
 
@@ -28,6 +28,9 @@ const RegisterPJ = (props: IPropsRegisterPJ) => {
       setLoading(false);
     } else {
       setLoading(false);
+      sessionStorage.setItem("username", userInfo?.cpf ? userInfo.cpf : "");
+      sessionStorage.setItem("password", userInfo?.senha ? userInfo.senha : "");
+      window.location.assign("/register-success");
     }
   };
 
@@ -45,7 +48,7 @@ const RegisterPJ = (props: IPropsRegisterPJ) => {
         />
         <Input
           id="input-cpf"
-          label="Cnpj"
+          label="CPF"
           placeholder="000.000.000-00"
           width="367px"
           onChange={(e) => setUserInfo({ ...userInfo, cpf: e.target.value })}

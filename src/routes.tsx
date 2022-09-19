@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import { ProtectedRoute } from "./auth";
 import Homepage from "./pages/HomePage/Homepage";
 import Login from "./pages/Login/Login";
+import RegisterSuccess from "./pages/Register/Register/RegisterSucess";
 import RegisterMain from "./pages/Register/RegisterMain";
 
 const AppRouter = [
@@ -18,6 +19,10 @@ const AppRouter = [
     main: <Homepage />,
     path: "/home",
     auth: true,
+  },
+  {
+    main: <RegisterSuccess />,
+    path: "/register-success",
   },
 ];
 

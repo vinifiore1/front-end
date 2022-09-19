@@ -6,9 +6,10 @@ import { ContainerInputs, ContainerPassword } from "../styles/styles";
 import { HiddePass } from "../../../img/HiddePass";
 import { ShowPass } from "../../../img/ShowPass";
 import { useState } from "react";
-import { IRegisterClient } from "../styles/interface";
+import { IErrorsClient, IRegisterClient } from "../interface";
 import { maskBornDate, maskCpf, maskPhone } from "../../../utils/mask";
 import { connect } from "../../../api/connect";
+import { cpf } from "cpf-cnpj-validator";
 
 interface IPropsRegisterPF {
   active?: boolean;
@@ -18,17 +19,73 @@ interface IPropsRegisterPF {
 const RegisterPF = (props: IPropsRegisterPF) => {
   const [showPass, setShowPass] = useState(false);
   const [showConfirmPass, setShowConfirmPass] = useState(false);
-  const [userInfo, setUserInfo] = useState<IRegisterClient>();
+  const [userInfo, setUserInfo] = useState<IRegisterClient>({});
   const [loading, setLoading] = useState(false);
+  const [errors, setErrors] = useState<IErrorsClient>({});
 
   const handleCreateClient = async () => {
-    setLoading(true);
-    const createClient = await connect("registro-cliente", userInfo);
-    if (createClient.code === "ERR_BAD_RESPONSE") {
-      setLoading(false);
+    const errors = errorsTest();
+    if (errors) {
+      setErrors(errors);
     } else {
-      setLoading(false);
+      setLoading(true);
+      const createClient = await connect("registro-cliente", userInfo);
+      if (createClient.code === "ERR_BAD_RESPONSE") {
+        setLoading(false);
+      } else {
+        sessionStorage.setItem("username", userInfo?.cpf ? userInfo.cpf : "");
+        sessionStorage.setItem(
+          "password",
+          userInfo?.senha ? userInfo.senha : ""
+        );
+        setLoading(false);
+        window.location.assign("/register-success");
+      }
     }
+  };
+
+  const handleTestValidation = (item: any) => {
+    if (item.id === "input-cpf") {
+      const cpfIsValid = cpf.isValid(item.value);
+      if (!cpfIsValid) {
+        setErrors({ ...errors, cpfMessage: "CPF inválido!", cpf: true });
+      } else {
+        setErrors({ ...errors, cpf: false });
+      }
+    }
+    if (item.id === "input-confrim-password") {
+      const senhaIsValid = userInfo.senha === userInfo.confirmSenha;
+      if (!senhaIsValid) {
+        setErrors({
+          ...errors,
+          confirmSenhaMessage: "As senhas não são compatíveis!",
+          confirmSenha: true,
+        });
+      }
+    }
+  };
+
+  const errorsTest = () => {
+    const error: IErrorsClient = {};
+    if (!userInfo?.nome) {
+      error.nome = true;
+    } else error.nome = false;
+    if (!userInfo.cpf) {
+      error.cpf = true;
+    } else error.cpf = false;
+    if (!userInfo.dataNascimento) {
+      error.dataNascimento = true;
+    } else error.dataNascimento = false;
+    if (!userInfo.telefone) {
+      error.telefone = true;
+    } else error.telefone = false;
+    if (!userInfo.senha) {
+      error.senha = true;
+    } else error.senha = false;
+    if (!userInfo.confirmSenha) {
+      error.confirmSenha = true;
+    } else error.confirmSenha = false;
+    return error;
   };
 
   return (
@@ -40,16 +97,20 @@ const RegisterPF = (props: IPropsRegisterPF) => {
           label="Nome"
           placeholder="Nome"
           onChange={(e) => setUserInfo({ ...userInfo, nome: e.target.value })}
-          value={userInfo?.nome}
+          value={userInfo.nome}
           width="367px"
+          error={errors.nome}
         />
         <Input
           id="input-cpf"
-          label="Cpf"
+          label="CPF"
           placeholder="000.000.000-00"
           width="367px"
+          onBlur={(e) => handleTestValidation(e.target)}
           onChange={(e) => setUserInfo({ ...userInfo, cpf: e.target.value })}
-          value={userInfo?.cpf ? maskCpf(userInfo?.cpf) : ""}
+          value={userInfo.cpf ? maskCpf(userInfo?.cpf) : ""}
+          error={errors.cpf}
+          erroMessage={errors.cpfMessage}
         />
         <Input
           id="input-date"
@@ -61,10 +122,9 @@ const RegisterPF = (props: IPropsRegisterPF) => {
             setUserInfo({ ...userInfo, dataNascimento: e.target.value })
           }
           value={
-            userInfo?.dataNascimento
-              ? maskBornDate(userInfo?.dataNascimento)
-              : ""
+            userInfo.dataNascimento ? maskBornDate(userInfo.dataNascimento) : ""
           }
+          error={errors.dataNascimento}
         />
         <Input
           id="input-phone"
@@ -74,7 +134,8 @@ const RegisterPF = (props: IPropsRegisterPF) => {
           onChange={(e) =>
             setUserInfo({ ...userInfo, telefone: e.target.value })
           }
-          value={userInfo?.telefone ? maskPhone(userInfo?.telefone) : ""}
+          value={userInfo.telefone ? maskPhone(userInfo.telefone) : ""}
+          error={errors.telefone}
         />
       </ContainerInputs>
       <ContainerPassword>
@@ -85,7 +146,7 @@ const RegisterPF = (props: IPropsRegisterPF) => {
           width="367px"
           type={showPass ? "text" : "password"}
           onChange={(e) => setUserInfo({ ...userInfo, senha: e.target.value })}
-          value={userInfo?.senha}
+          value={userInfo.senha}
           endAdornment={
             <span
               id="hidde-show-password"
@@ -94,6 +155,7 @@ const RegisterPF = (props: IPropsRegisterPF) => {
               {showPass ? <ShowPass /> : <HiddePass />}
             </span>
           }
+          error={errors.senha}
         />
         <Input
           id="input-confrim-password"
@@ -101,10 +163,11 @@ const RegisterPF = (props: IPropsRegisterPF) => {
           placeholder="***********"
           width="367px"
           type={showConfirmPass ? "text" : "password"}
+          onBlur={(e) => handleTestValidation(e.target)}
           onChange={(e) =>
             setUserInfo({ ...userInfo, confirmSenha: e.target.value })
           }
-          value={userInfo?.confirmSenha}
+          value={userInfo.confirmSenha}
           endAdornment={
             <span
               id="hidde-show-password"
@@ -113,6 +176,8 @@ const RegisterPF = (props: IPropsRegisterPF) => {
               {showConfirmPass ? <ShowPass /> : <HiddePass />}
             </span>
           }
+          error={errors.confirmSenha}
+          erroMessage={errors.confirmSenhaMessage}
         />
       </ContainerPassword>
 
