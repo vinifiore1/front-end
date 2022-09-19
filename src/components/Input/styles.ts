@@ -4,6 +4,7 @@ interface PropsAdminInput {
   value?: boolean;
   errorMessage?: boolean;
   disabled?: boolean;
+  error?: boolean;
   width?: string;
 }
 
@@ -43,6 +44,7 @@ export const AdminInputMain = styled.input<PropsAdminInputOmitter>`
   height: 51px;
   color: #808080;
   padding-right: 5px;
+  margin-bottom: ${(props) => (props.error ? "20px" : "")};
   &#new-password-confirm-label-error {
     border-bottom: 2px solid var(--red-1);
   }
@@ -69,4 +71,12 @@ export const AdminSpanBottomAdorment = styled.span`
   position: absolute;
   top: 44px;
   width: 100%;
+`;
+
+export const AdminError = styled.span`
+  position: absolute;
+  top: 80px;
+  font-family: "Ubuntu";
+  color: #9d0208;
+  padding: 10px 10px 10px 0;
 `;

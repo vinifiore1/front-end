@@ -9,6 +9,7 @@ import {
   AdminSpanLabel,
   AdminRequiredInput,
   AdminSpanBottomAdorment,
+  AdminError,
 } from "./styles";
 
 interface IAdminInputProps {
@@ -18,7 +19,6 @@ interface IAdminInputProps {
   value?: string;
   name?: string;
   width?: string;
-
   minLength?: number;
   maxLength?: number;
   disabled?: boolean;
@@ -32,6 +32,8 @@ interface IAdminInputProps {
   onKeyPress?: (value?: any) => void;
   placeholder?: string;
   dataMask?: string;
+  error?: boolean;
+  erroMessage?: string;
 }
 
 export const Input = ({
@@ -54,6 +56,8 @@ export const Input = ({
   onKeyPress,
   placeholder,
   dataMask,
+  error,
+  erroMessage,
 }: IAdminInputProps) => {
   // no state used
   const labelStyles = useMemo(() => {
@@ -101,6 +105,7 @@ export const Input = ({
         name={name}
         placeholder={placeholder}
         data-mask={dataMask}
+        error={error}
       />
 
       {endAdornment && (
@@ -109,6 +114,7 @@ export const Input = ({
       {bottomAdornment && (
         <AdminSpanBottomAdorment>{bottomAdornment}</AdminSpanBottomAdorment>
       )}
+      {error && <AdminError>{erroMessage}</AdminError>}
     </AdminLabelContainer>
   );
 };

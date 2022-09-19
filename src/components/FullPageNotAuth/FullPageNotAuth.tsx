@@ -1,11 +1,11 @@
-import React, { ReactNode, useState } from "react";
-import { Button } from "../../components/Button/Button";
-import { Input } from "../../components/Input/Input";
+import React, { ReactNode } from "react";
 import { ContainerChildren, LoginContainerMain, LogoContainer } from "./styles";
 import mainLogo from "../../img/Logo.png";
+import { AdminLoading } from "../AdminLoading/AdminLoading";
 
 interface IPropsFullPage {
   children?: ReactNode;
+  loading?: boolean;
 }
 
 export const FullPageNotAuth = (props: IPropsFullPage) => {
@@ -15,6 +15,7 @@ export const FullPageNotAuth = (props: IPropsFullPage) => {
         <img src={mainLogo} alt="Error" />
       </LogoContainer>
       <ContainerChildren>{props.children}</ContainerChildren>
+      {props.loading && <AdminLoading />}
     </LoginContainerMain>
   );
 };

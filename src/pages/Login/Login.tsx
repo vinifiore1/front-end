@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Button } from "../../components/Button/Button";
 import { Input } from "../../components/Input/Input";
 import {
@@ -18,38 +18,48 @@ import { FullPageNotAuth } from "../../components/FullPageNotAuth/FullPageNotAut
 import { Link } from "react-router-dom";
 import { maskCpf } from "../../utils/mask";
 
+interface IErrorProps {
+  error?: boolean;
+  message?: string;
+}
+
 export default function Login() {
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [showPass, setShowPass] = useState(false);
+  const [error, setError] = useState<IErrorProps>();
+  const [loading, setLoading] = useState(false);
 
   const handleLogin = async () => {
     const body = { cpf: username, senha: password };
+    setLoading(true);
 
-    if (body) {
+    if (body.cpf !== "" && body.senha !== "") {
       const clientConnect = await connect("autenticacao-cliente", body);
-      switch (clientConnect.code) {
-        case "ERR_BAD_RESPONSE":
-          const businessConnect = await connect(
-            "autenticacao-funcionario",
-            body
-          );
-          if (businessConnect.code === "ERR_BAD_RESPONSE") {
-            console.log("usuario e/ou senha invalido");
-          } else {
-            console.log(businessConnect);
-          }
-          break;
-        case "":
-          console.log(clientConnect);
-          break;
+
+      if (clientConnect.code === "ERR_BAD_RESPONSE") {
+        const businessConnect = await connect("autenticacao-funcionario", body);
+        if (businessConnect.code === "ERR_BAD_RESPONSE") {
+          setError({ error: true, message: "CPF e/ou senha inválidos" });
+          setLoading(false);
+        } else {
+          setLoading(false);
+          sessionStorage.setItem("token", businessConnect.token);
+          window.location.assign("/teste-auth");
+        }
+      } else {
+        setLoading(false);
+        sessionStorage.setItem("token", clientConnect.token);
+        window.location.assign("/teste-auth");
       }
     } else {
-      console.log("error");
+      setLoading(false);
+      setError({ error: true, message: "Necessário preencher os campos" });
     }
   };
+
   return (
-    <FullPageNotAuth>
+    <FullPageNotAuth loading={loading}>
       <InputContainerMain>
         <InputContainer>
           <Input
@@ -76,6 +86,8 @@ export default function Login() {
                 {showPass ? <ShowPass /> : <HiddePass />}
               </span>
             }
+            error={error?.error}
+            erroMessage={error?.message}
           />
           <ForgotPassContainer>
             <ForgotPassword>Esqueci minha senha</ForgotPassword>
