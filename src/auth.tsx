@@ -1,10 +1,14 @@
 import { Navigate } from "react-router-dom";
 
-export const ProtectedRoute = (children: any) => {
+interface IProps {
+  children?: any;
+}
+
+export const ProtectedRoute = ({ children }: IProps) => {
   const user = sessionStorage.getItem("token");
-  console.log(user);
   if (!user) {
     return <Navigate to={"/"} />;
+  } else {
+    return children;
   }
-  return children;
 };

@@ -45,10 +45,12 @@ export default function Login() {
         } else {
           setLoading(false);
           sessionStorage.setItem("token", businessConnect.token);
+          window.location.assign("/home");
         }
       } else {
         setLoading(false);
         sessionStorage.setItem("token", clientConnect.token);
+        window.location.assign("/home");
       }
     } else {
       setLoading(false);

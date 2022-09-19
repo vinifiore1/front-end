@@ -1,4 +1,3 @@
-import { error } from "console";
 import styled from "styled-components";
 
 interface PropsAdminInput {

@@ -1,5 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import { ProtectedRoute } from "./auth";
+import Homepage from "./pages/HomePage/Homepage";
 import Login from "./pages/Login/Login";
 import RegisterMain from "./pages/Register/RegisterMain";
 
@@ -14,8 +15,8 @@ const AppRouter = [
     path: "/register",
   },
   {
-    main: <div>TESTE</div>,
-    path: "/teste-auth",
+    main: <Homepage />,
+    path: "/home",
     auth: true,
   },
 ];
