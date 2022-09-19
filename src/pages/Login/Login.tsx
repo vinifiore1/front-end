@@ -45,12 +45,10 @@ export default function Login() {
         } else {
           setLoading(false);
           sessionStorage.setItem("token", businessConnect.token);
-          window.location.assign("/teste-auth");
         }
       } else {
         setLoading(false);
         sessionStorage.setItem("token", clientConnect.token);
-        window.location.assign("/teste-auth");
       }
     } else {
       setLoading(false);
@@ -69,6 +67,7 @@ export default function Login() {
             value={maskCpf(username)}
             onChange={(e) => setUserName(e.target.value)}
             placeholder="000.000.000-00"
+            error={error?.error}
           />
           <Input
             id="input-password"

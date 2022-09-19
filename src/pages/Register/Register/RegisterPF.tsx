@@ -19,13 +19,20 @@ const RegisterPF = (props: IPropsRegisterPF) => {
   const [showPass, setShowPass] = useState(false);
   const [showConfirmPass, setShowConfirmPass] = useState(false);
   const [userInfo, setUserInfo] = useState<IRegisterClient>();
+  const [loading, setLoading] = useState(false);
 
   const handleCreateClient = async () => {
+    setLoading(true);
     const createClient = await connect("registro-cliente", userInfo);
+    if (createClient.code === "ERR_BAD_RESPONSE") {
+      setLoading(false);
+    } else {
+      setLoading(false);
+    }
   };
 
   return (
-    <FullPageNotAuth>
+    <FullPageNotAuth loading={loading}>
       <ContainerInputs>
         <RegisterButtons setActive={props.setActive} active={props.active} />
         <Input

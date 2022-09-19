@@ -19,15 +19,20 @@ const RegisterPJ = (props: IPropsRegisterPJ) => {
   const [showPass, setShowPass] = useState(false);
   const [showConfirmPass, setShowConfirmPass] = useState(false);
   const [userInfo, setUserInfo] = useState<IRegisterClient>();
+  const [loading, setLoading] = useState(false);
 
-  const handleCreateClient = async () => {
-    const createClient = await connect("registro-cliente", userInfo);
-
-    console.log(createClient);
+  const handleCreateEmploye = async () => {
+    setLoading(true);
+    const createEmploye = await connect("registro-funcionario", userInfo);
+    if (createEmploye.code === "ERR_BAD_RESPONSE") {
+      setLoading(false);
+    } else {
+      setLoading(false);
+    }
   };
 
   return (
-    <FullPageNotAuth>
+    <FullPageNotAuth loading={loading}>
       <ContainerInputs>
         <RegisterButtons setActive={props.setActive} active={props.active} />
         <Input
@@ -114,7 +119,7 @@ const RegisterPJ = (props: IPropsRegisterPJ) => {
       <Button
         id="regiter-button-pf"
         label="Cadastrar"
-        onClick={() => handleCreateClient()}
+        onClick={() => handleCreateEmploye()}
       />
     </FullPageNotAuth>
   );

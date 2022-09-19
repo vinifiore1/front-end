@@ -106,6 +106,7 @@ export const Input = ({
         placeholder={placeholder}
         data-mask={dataMask}
         error={error}
+        erroMessage={erroMessage}
       />
 
       {endAdornment && (

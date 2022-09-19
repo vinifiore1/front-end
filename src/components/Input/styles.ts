@@ -1,3 +1,4 @@
+import { error } from "console";
 import styled from "styled-components";
 
 interface PropsAdminInput {
@@ -6,6 +7,7 @@ interface PropsAdminInput {
   disabled?: boolean;
   error?: boolean;
   width?: string;
+  erroMessage?: string;
 }
 
 type PropsAdminInputOmitter = Omit<PropsAdminInput, "value">;
@@ -34,7 +36,7 @@ export const AdminSpanLabel = styled.span<PropsAdminInput>`
 
 export const AdminInputMain = styled.input<PropsAdminInputOmitter>`
   border: none;
-  border: 1px solid #c4c4c4;
+  border: ${(props) => (props.error ? "1px solid red" : "1px solid #c4c4c4")};
   border-radius: 3px;
   background: transparent !important;
   font-size: 16px;
@@ -44,7 +46,7 @@ export const AdminInputMain = styled.input<PropsAdminInputOmitter>`
   height: 51px;
   color: #808080;
   padding-right: 5px;
-  margin-bottom: ${(props) => (props.error ? "20px" : "")};
+  margin-bottom: ${(props) => (props.erroMessage ? "20px" : "")};
   &#new-password-confirm-label-error {
     border-bottom: 2px solid var(--red-1);
   }
