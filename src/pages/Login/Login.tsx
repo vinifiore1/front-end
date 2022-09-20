@@ -4,8 +4,6 @@ import { Input } from "../../components/Input/Input";
 import {
   ButtonContainer,
   ButtonRegister,
-  ForgotPassContainer,
-  ForgotPassword,
   InputContainer,
   InputContainerMain,
   TextRegisterContainer,
@@ -90,9 +88,7 @@ export default function Login() {
             error={error?.error}
             erroMessage={error?.message}
           />
-          <ForgotPassContainer>
-            <ForgotPassword>Esqueci minha senha</ForgotPassword>
-          </ForgotPassContainer>
+
           <ButtonContainer>
             <Button
               id="button-login"
