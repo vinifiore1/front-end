@@ -7,15 +7,12 @@ export const LoginContainerMain = styled.div`
 `;
 
 export const LogoContainer = styled.div`
-  height: 100vh;
+  min-height: 100vh;
   width: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   background: #354f52;
-  @media (max-width: 1400px) {
-    height: 120vh;
-  }
 `;
 export const ContainerChildren = styled.div`
   width: 50%;

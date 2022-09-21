@@ -5,6 +5,8 @@ export interface IRegisterClient {
   dataNascimento?: string;
   senha?: string;
   confirmSenha?: string;
+  email?: string;
+  pix?: string;
 }
 
 export interface IErrorsClient {
@@ -20,4 +22,7 @@ export interface IErrorsClient {
   telefoneMessage?: string;
   senhaMessage?: string;
   confirmSenhaMessage?: string;
+  email?: boolean;
+  emailMessage?: string;
+  pix?: boolean;
 }

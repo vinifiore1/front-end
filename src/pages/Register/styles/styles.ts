@@ -4,6 +4,7 @@ export const ContainerInputs = styled.div`
   border-bottom: 1px solid #cad2c5;
   width: 100%;
   max-width: 367px;
+
   padding-bottom: 40px;
 `;
 
@@ -40,4 +41,10 @@ export const ContainerTextSecondary = styled.span`
   align-items: center;
   text-align: center;
   color: #354f52;
+`;
+
+export const ContainerRegisterPJ = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 72px;
 `;
