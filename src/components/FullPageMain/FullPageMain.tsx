@@ -1,11 +1,5 @@
 import React, { ReactNode } from "react";
-import {
-  ContainerChildren,
-  HeaderContainer,
-  FullPageContainerMain,
-  FullPageContainer,
-  SideBarContainerChildren,
-} from "./styles";
+import { FullPageContainer, SideBarContainerChildren } from "./styles";
 
 import { AdminLoading } from "../AdminLoading/AdminLoading";
 import { Header } from "../Header/Header";
@@ -18,17 +12,16 @@ interface IPropsFullPage {
 
 export const FullPageMain = (props: IPropsFullPage) => {
   return (
-    <FullPageContainerMain>
+    <>
+      <Header />
+
       <FullPageContainer>
-        <HeaderContainer>
-          <Header />
-        </HeaderContainer>
         <SideBarContainerChildren>
           <SideBar />
-          <ContainerChildren>{props.children}</ContainerChildren>
+          {props.children}
         </SideBarContainerChildren>
       </FullPageContainer>
       {props.loading && <AdminLoading />}
-    </FullPageContainerMain>
+    </>
   );
 };

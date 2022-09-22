@@ -33,7 +33,11 @@ const RegisterPJ = (props: IPropsRegisterPJ) => {
       setErrors(errors);
     } else {
       setLoading(true);
-      const createEmploye = await connect("registro-funcionario", userInfo);
+      const createEmploye = await connect(
+        "registro-funcionario",
+        "post",
+        userInfo
+      );
       if (createEmploye.code === "ERR_BAD_RESPONSE") {
         setLoading(false);
       } else {

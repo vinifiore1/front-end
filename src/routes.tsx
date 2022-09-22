@@ -1,6 +1,5 @@
 import { Route, Routes } from "react-router-dom";
 import { ProtectedRoute } from "./auth";
-import { AgendamentoIcon } from "./img/AgendamentoIcon";
 import Agendamento from "./pages/Agendamento/Agendamento";
 import DashBoard from "./pages/DashBoard/DashBoard";
 import Login from "./pages/Login/Login";

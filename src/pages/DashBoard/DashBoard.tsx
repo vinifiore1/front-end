@@ -1,14 +1,36 @@
+import { useEffect } from "react";
+import { connect } from "../../api/connect";
 import { FullPageMain } from "../../components/FullPageMain/FullPageMain";
-import { Logo, LogoContainerHome } from "./styles";
-import mainLogo from "../../img/Logo.png";
+import {
+  DashBoardContainer,
+  PrimaryContainer,
+  TextTitleContainer,
+  TextTitleDashBoard,
+} from "./styles";
 
 const DashBoard = () => {
-  console.log(localStorage.getItem("page"));
+  const token = sessionStorage.getItem("token");
+
+  const getAllServices = async () => {
+    const servicosGetAll = await connect("servico", "get", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    return servicosGetAll;
+  };
+  useEffect(() => {
+    getAllServices();
+  }, []);
   return (
     <FullPageMain>
-      <LogoContainerHome>
-        <Logo src={mainLogo} />
-      </LogoContainerHome>
+      <DashBoardContainer>
+        <TextTitleContainer>
+          <TextTitleDashBoard>Bem vindo(a)!</TextTitleDashBoard>
+        </TextTitleContainer>
+        <PrimaryContainer></PrimaryContainer>
+      </DashBoardContainer>
     </FullPageMain>
   );
 };

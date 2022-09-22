@@ -1,24 +1,12 @@
 import styled from "styled-components";
 
-export const FullPageContainerMain = styled.div`
-  display: flex;
-  width: 100vw;
-  height: 100vh;
-`;
-
-export const ContainerChildren = styled.div`
-  width: 100%;
-  height: 100%;
-`;
-
-export const HeaderContainer = styled.div`
-  display: flex;
-  width: 100vw;
-`;
+export const ContainerChildren = styled.div``;
 
 export const FullPageContainer = styled.div`
   display: flex;
   flex-direction: column;
+  height: 100%;
+  width: 100%;
 `;
 
 export const SideBarContainerChildren = styled.div`

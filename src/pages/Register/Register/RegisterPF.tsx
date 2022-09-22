@@ -29,7 +29,7 @@ const RegisterPF = (props: IPropsRegisterPF) => {
       setErrors(errors);
     } else {
       setLoading(true);
-      const createClient = await connect("registro-cliente", userInfo);
+      const createClient = await connect("registro-cliente", "post", userInfo);
       if (createClient.code === "ERR_BAD_RESPONSE") {
         setLoading(false);
       } else {

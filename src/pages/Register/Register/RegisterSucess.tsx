@@ -15,10 +15,14 @@ const RegisterSuccess = () => {
     const user = sessionStorage.getItem("username");
     const pass = sessionStorage.getItem("password");
     const body = { cpf: user, senha: pass };
-    const clientConnect = await connect("autenticacao-cliente", body);
+    const clientConnect = await connect("autenticacao-cliente", "post", body);
 
     if (clientConnect.code === "ERR_BAD_RESPONSE") {
-      const businessConnect = await connect("autenticacao-funcionario", body);
+      const businessConnect = await connect(
+        "autenticacao-funcionario",
+        "post",
+        body
+      );
       if (businessConnect.code === "ERR_BAD_RESPONSE") {
         setLoading(false);
       } else {

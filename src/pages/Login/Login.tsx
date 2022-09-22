@@ -33,10 +33,14 @@ export default function Login() {
     setLoading(true);
 
     if (body.cpf !== "" && body.senha !== "") {
-      const clientConnect = await connect("autenticacao-cliente", body);
+      const clientConnect = await connect("autenticacao-cliente", "post", body);
 
       if (clientConnect.code === "ERR_BAD_RESPONSE") {
-        const businessConnect = await connect("autenticacao-funcionario", body);
+        const businessConnect = await connect(
+          "autenticacao-funcionario",
+          "post",
+          body
+        );
         if (businessConnect.code === "ERR_BAD_RESPONSE") {
           setError({ error: true, message: "CPF e/ou senha inválidos" });
           setLoading(false);
@@ -44,10 +48,14 @@ export default function Login() {
           setLoading(false);
           sessionStorage.setItem("token", businessConnect.token);
           window.location.assign("/home");
+          sessionStorage.setItem("user", businessConnect);
         }
       } else {
         setLoading(false);
         sessionStorage.setItem("token", clientConnect.token);
+        sessionStorage.setItem("user", JSON.stringify(clientConnect.usuario));
+        sessionStorage.setItem("role", clientConnect.role);
+
         window.location.assign("/home");
       }
     } else {
