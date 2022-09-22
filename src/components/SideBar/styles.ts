@@ -1,9 +1,13 @@
 import styled from "styled-components";
 
+interface IPropsButton {
+  disabled?: boolean;
+}
+
 export const SideBarContainer = styled.div`
   background: #354f52;
   min-width: 250px;
-  height: 100%;
+  padding-top: 25px;
 `;
 
 export const SideBarContainerMain = styled.div`
@@ -15,23 +19,27 @@ export const SideBarContainerMain = styled.div`
   grid-gap: 20px;
 `;
 
-export const SideBarContainerButton = styled.button`
+export const SideBarContainerButton = styled.button<IPropsButton>`
   display: flex;
   grid-gap: 19px;
-  background: rgba(0, 0, 0, 0.2);
+  background: ${(props) => (props.disabled ? "rgba(0, 0, 0, 0.2)" : "none")};
+  color: ${(props) => (props.disabled ? " #ffffff" : "#7C898B")};
   border: none;
   border-radius: 3px;
   padding: 8px 57px 9px 10px;
   min-width: 210px;
   max-height: 37px;
+  cursor: pointer;
+  path {
+    fill: ${(props) => (props.disabled ? " #ffffff" : "#7C898B")};
+  }
 `;
 
 export const IconContainer = styled.div``;
 
-export const TextContainer = styled.span`
+export const TextContainer = styled.span<IPropsButton>`
   font-family: "Ubuntu";
   font-size: 16px;
-  color: #ffffff;
 `;
 
 export const TextTitle = styled.div`
