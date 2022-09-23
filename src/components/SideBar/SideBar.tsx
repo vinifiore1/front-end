@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { AgendamentoIcon } from "../../img/icones/AgendamentoIcon";
 import { DashBoardIcon } from "../../img/icones/DashBoardIcon";
 import {
@@ -15,7 +16,7 @@ export const SideBar = () => {
     {
       id: "dashboard-sidebar",
       icon: <DashBoardIcon />,
-      main: "DashBoard",
+      main: "Dashboard",
       route: "/home",
       role: ["ROLE_CLIENT", "ROLE_ADMIN"],
     },
@@ -31,6 +32,7 @@ export const SideBar = () => {
     sessionStorage.setItem("page", item.textContent);
     window.location.assign(route);
   };
+
   return (
     <SideBarContainer>
       <SideBarContainerMain>

@@ -30,7 +30,7 @@ const DashBoard = () => {
   };
   useEffect(() => {
     getAllServices();
-  });
+  }, []);
 
   return (
     <FullPageMain>
