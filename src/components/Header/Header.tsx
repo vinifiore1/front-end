@@ -1,4 +1,4 @@
-import { IconShowProfile } from "../../img/IconShowProfile";
+import { IconShowProfile } from "../../img/icones/IconShowProfile";
 import {
   HeaderContainerMain,
   ProfileHeaderContainer,

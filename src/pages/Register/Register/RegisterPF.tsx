@@ -3,8 +3,8 @@ import { FullPageNotAuth } from "../../../components/FullPageNotAuth/FullPageNot
 import { Input } from "../../../components/Input/Input";
 import RegisterButtons from "../../../components/RegisterButtons/RegisterButtons";
 import { ContainerInputs, ContainerPassword } from "../styles/styles";
-import { HiddePass } from "../../../img/HiddePass";
-import { ShowPass } from "../../../img/ShowPass";
+import { HiddePass } from "../../../img/icones/HiddePass";
+import { ShowPass } from "../../../img/icones/ShowPass";
 import { useState } from "react";
 import { IErrorsClient, IRegisterClient } from "../interface";
 import { maskBornDate, maskCpf, maskPhone } from "../../../utils/mask";

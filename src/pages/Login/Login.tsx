@@ -9,8 +9,8 @@ import {
   TextRegisterContainer,
   TextRegisterRegular,
 } from "./styles";
-import { HiddePass } from "../../img/HiddePass";
-import { ShowPass } from "../../img/ShowPass";
+import { HiddePass } from "../../img/icones/HiddePass";
+import { ShowPass } from "../../img/icones/ShowPass";
 import { connect } from "../../api/connect";
 import { FullPageNotAuth } from "../../components/FullPageNotAuth/FullPageNotAuth";
 import { Link } from "react-router-dom";
@@ -47,15 +47,16 @@ export default function Login() {
         } else {
           setLoading(false);
           sessionStorage.setItem("token", businessConnect.token);
-          window.location.assign("/home");
           sessionStorage.setItem("user", businessConnect);
+          sessionStorage.setItem("page", "Dashboard");
+          window.location.assign("/home");
         }
       } else {
         setLoading(false);
         sessionStorage.setItem("token", clientConnect.token);
         sessionStorage.setItem("user", JSON.stringify(clientConnect.usuario));
         sessionStorage.setItem("role", clientConnect.role);
-
+        sessionStorage.setItem("page", "Dashboard");
         window.location.assign("/home");
       }
     } else {

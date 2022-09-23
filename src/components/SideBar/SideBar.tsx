@@ -1,5 +1,5 @@
-import { AgendamentoIcon } from "../../img/AgendamentoIcon";
-import { DashBoardIcon } from "../../img/DashBoardIcon";
+import { AgendamentoIcon } from "../../img/icones/AgendamentoIcon";
+import { DashBoardIcon } from "../../img/icones/DashBoardIcon";
 import {
   IconContainer,
   SideBarContainer,

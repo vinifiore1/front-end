@@ -7,8 +7,8 @@ import {
   ContainerPassword,
   ContainerRegisterPJ,
 } from "../styles/styles";
-import { HiddePass } from "../../../img/HiddePass";
-import { ShowPass } from "../../../img/ShowPass";
+import { HiddePass } from "../../../img/icones/HiddePass";
+import { ShowPass } from "../../../img/icones/ShowPass";
 import { useState } from "react";
 import { IErrorsClient, IRegisterClient } from "../interface";
 import { maskBornDate, maskCpf, maskPhone } from "../../../utils/mask";

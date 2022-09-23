@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { connect } from "../../../api/connect";
 import { FullPageNotAuth } from "../../../components/FullPageNotAuth/FullPageNotAuth";
-import { CheckRegister } from "../../../img/CheckRegister";
+import { CheckRegister } from "../../../img/icones/CheckRegister";
 import {
   ContainerMainText,
   ContainerRegisterSuccess,
@@ -28,11 +28,13 @@ const RegisterSuccess = () => {
       } else {
         setLoading(false);
         sessionStorage.setItem("token", businessConnect.token);
+        sessionStorage.setItem("page", "Dashboard");
         window.location.assign("/home");
       }
     } else {
       setLoading(false);
       sessionStorage.setItem("token", clientConnect.token);
+      sessionStorage.setItem("page", "Dashboard");
       window.location.assign("/home");
     }
   };

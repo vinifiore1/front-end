@@ -1,6 +1,6 @@
 import React, { ReactNode } from "react";
 import { ContainerChildren, LoginContainerMain, LogoContainer } from "./styles";
-import mainLogo from "../../img/Logo.png";
+import mainLogo from "../../img/png/Logo.png";
 import { AdminLoading } from "../AdminLoading/AdminLoading";
 
 interface IPropsFullPage {
