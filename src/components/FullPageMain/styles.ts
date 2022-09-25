@@ -12,5 +12,5 @@ export const FullPageContainer = styled.div`
 export const SideBarContainerChildren = styled.div`
   display: flex;
   flex-direction: row;
-  height: 100vh;
+  min-height: 91.4vh;
 `;
