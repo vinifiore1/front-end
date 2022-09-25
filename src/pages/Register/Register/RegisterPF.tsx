@@ -25,7 +25,15 @@ const RegisterPF = (props: IPropsRegisterPF) => {
 
   const handleCreateClient = async () => {
     const errors = errorsTest();
-    if (errors) {
+    if (
+      errors.confirmSenha ||
+      errors.cpf ||
+      errors.dataNascimento ||
+      errors.email ||
+      errors.nome ||
+      errors.senha ||
+      errors.telefone
+    ) {
       setErrors(errors);
     } else {
       setLoading(true);

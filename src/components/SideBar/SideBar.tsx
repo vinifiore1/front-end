@@ -1,6 +1,9 @@
-import { useEffect } from "react";
 import { AgendamentoIcon } from "../../img/icones/AgendamentoIcon";
+import { ClientIcon } from "../../img/icones/ClientIcon";
 import { DashBoardIcon } from "../../img/icones/DashBoardIcon";
+import { EmployeeIcon } from "../../img/icones/EmployeeIcon";
+import { HourIcon } from "../../img/icones/HourIcon";
+import { ServicesIcon } from "../../img/icones/ServicesIcon";
 import {
   IconContainer,
   SideBarContainer,
@@ -12,6 +15,7 @@ import {
 export const SideBar = () => {
   const routeLocalStorage = sessionStorage.getItem("page");
   const userRole = sessionStorage.getItem("role");
+  console.log(sessionStorage.getItem("role"));
   const SideBar = [
     {
       id: "dashboard-sidebar",
@@ -26,6 +30,34 @@ export const SideBar = () => {
       main: "Agendamento",
       route: "/agendamento",
       role: ["ROLE_CLIENT", "ROLE_ADMIN"],
+    },
+    {
+      id: "test-sidebar",
+      icon: <ClientIcon />,
+      main: "Clientes",
+      route: "/agendamento",
+      role: ["ROLE_ADMIN"],
+    },
+    {
+      id: "test-sidebar",
+      icon: <EmployeeIcon />,
+      main: "Colaboradores",
+      route: "/agendamento",
+      role: ["ROLE_ADMIN"],
+    },
+    {
+      id: "test-sidebar",
+      icon: <ServicesIcon />,
+      main: "Serviços",
+      route: "/agendamento",
+      role: ["ROLE_ADMIN"],
+    },
+    {
+      id: "test-sidebar",
+      icon: <HourIcon />,
+      main: "Horarios",
+      route: "/agendamento",
+      role: ["ROLE_ADMIN"],
     },
   ];
   const handleSetLocalStorageRoute = (item: any, route: string) => {

@@ -48,6 +48,7 @@ export default function Login() {
           setLoading(false);
           sessionStorage.setItem("token", businessConnect.token);
           sessionStorage.setItem("user", businessConnect);
+          sessionStorage.setItem("role", businessConnect.role);
           sessionStorage.setItem("page", "Dashboard");
           window.location.assign("/home");
         }

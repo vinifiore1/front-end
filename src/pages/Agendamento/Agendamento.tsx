@@ -1,7 +1,7 @@
 import { FullPageMain } from "../../components/FullPageMain/FullPageMain";
 
 const Agendamento = () => {
-  return <FullPageMain>Agendamento</FullPageMain>;
+  return <FullPageMain></FullPageMain>;
 };
 
 export default Agendamento;

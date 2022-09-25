@@ -28,6 +28,28 @@ const Avatar = (props: IPropsAvatar) => {
           skinTone="light"
         />
       );
+    case "pediatra":
+      return (
+        <BigHead
+          body="chest"
+          circleColor="blue"
+          clothing="dressShirt"
+          clothingColor="green"
+          eyebrows="raised"
+          eyes="happy"
+          facialHair="none"
+          graphic="gatsby"
+          hair="afro"
+          hairColor="black"
+          hat="none"
+          hatColor="white"
+          lashes
+          lipColor="purple"
+          mask
+          mouth="openSmile"
+          skinTone="brown"
+        />
+      );
     default:
       return (
         <BigHead

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { connect } from "../../api/connect";
+
 import Avatar from "../../components/Avatar/Avatar";
 import ButtonRegister from "../../components/ButtonRegister/ButtonRegister";
 import { FullPageMain } from "../../components/FullPageMain/FullPageMain";

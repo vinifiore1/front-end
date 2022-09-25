@@ -29,9 +29,20 @@ const RegisterPJ = (props: IPropsRegisterPJ) => {
 
   const handleCreateEmploye = async () => {
     const errors = errorsTest();
-    if (errors) {
+    if (
+      errors.confirmSenha ||
+      errors.cpf ||
+      errors.dataNascimento ||
+      errors.email ||
+      errors.nome ||
+      errors.pix ||
+      errors.senha ||
+      errors.telefone
+    ) {
+      console.log(errors);
       setErrors(errors);
     } else {
+      console.log(errors, userInfo);
       setLoading(true);
       const createEmploye = await connect(
         "registro-funcionario",
