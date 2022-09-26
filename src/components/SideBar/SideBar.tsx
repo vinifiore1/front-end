@@ -15,7 +15,7 @@ import {
 export const SideBar = () => {
   const routeLocalStorage = sessionStorage.getItem("page");
   const userRole = sessionStorage.getItem("role");
-  console.log(sessionStorage.getItem("role"));
+
   const SideBar = [
     {
       id: "dashboard-sidebar",

@@ -39,10 +39,8 @@ const RegisterPJ = (props: IPropsRegisterPJ) => {
       errors.senha ||
       errors.telefone
     ) {
-      console.log(errors);
       setErrors(errors);
     } else {
-      console.log(errors, userInfo);
       setLoading(true);
       const createEmploye = await connect(
         "registro-funcionario",
