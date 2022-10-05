@@ -3,6 +3,7 @@ import { FullPageNotAuth } from "../../../components/FullPageNotAuth/FullPageNot
 import { Input } from "../../../components/Input/Input";
 import RegisterButtons from "../../../components/RegisterButtons/RegisterButtons";
 import {
+  ContainerButtons,
   ContainerInputs,
   ContainerPassword,
   ContainerRegisterPJ,
@@ -14,6 +15,8 @@ import { IErrorsClient, IRegisterClient } from "../interface";
 import { maskBornDate, maskCpf, maskPhone } from "../../../utils/mask";
 import { connect } from "../../../api/connect";
 import { cpf } from "cpf-cnpj-validator";
+import { ButtonSecondary } from "../../../components/ButtonSecondary/ButtonSecondary";
+import { Link } from "react-router-dom";
 
 interface IPropsRegisterPJ {
   active?: boolean;
@@ -265,12 +268,16 @@ const RegisterPJ = (props: IPropsRegisterPJ) => {
             erroMessage={errors.confirmSenhaMessage}
           />
         </ContainerPassword>
-
-        <Button
-          id="regiter-button-pf"
-          label="Cadastrar"
-          onClick={() => handleCreateEmploye()}
-        />
+        <ContainerButtons>
+          <Button
+            id="regiter-button-pf"
+            label="Cadastrar"
+            onClick={() => handleCreateEmploye()}
+          />
+          <Link to={"/"}>
+            <ButtonSecondary id="button-register" label="Voltar" />
+          </Link>
+        </ContainerButtons>
       </ContainerRegisterPJ>
     </FullPageNotAuth>
   );

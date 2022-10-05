@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Button } from "../../components/Button/Button";
 import RegisterPF from "./Register/RegisterPF";
 import RegisterPJ from "./Register/RegisterPJ";
 

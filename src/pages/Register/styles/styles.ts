@@ -48,3 +48,11 @@ export const ContainerRegisterPJ = styled.div`
   flex-direction: column;
   padding: 72px;
 `;
+
+export const ContainerButtons = styled.div`
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
+  grid-gap: 10px;
+`;

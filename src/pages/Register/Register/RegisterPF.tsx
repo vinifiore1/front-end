@@ -2,7 +2,11 @@ import { Button } from "../../../components/Button/Button";
 import { FullPageNotAuth } from "../../../components/FullPageNotAuth/FullPageNotAuth";
 import { Input } from "../../../components/Input/Input";
 import RegisterButtons from "../../../components/RegisterButtons/RegisterButtons";
-import { ContainerInputs, ContainerPassword } from "../styles/styles";
+import {
+  ContainerButtons,
+  ContainerInputs,
+  ContainerPassword,
+} from "../styles/styles";
 import { HiddePass } from "../../../img/icones/HiddePass";
 import { ShowPass } from "../../../img/icones/ShowPass";
 import { useState } from "react";
@@ -10,6 +14,8 @@ import { IErrorsClient, IRegisterClient } from "../interface";
 import { maskBornDate, maskCpf, maskPhone } from "../../../utils/mask";
 import { connect } from "../../../api/connect";
 import { cpf } from "cpf-cnpj-validator";
+import { ButtonSecondary } from "../../../components/ButtonSecondary/ButtonSecondary";
+import { Link } from "react-router-dom";
 
 interface IPropsRegisterPF {
   active?: boolean;
@@ -189,11 +195,16 @@ const RegisterPF = (props: IPropsRegisterPF) => {
         />
       </ContainerPassword>
 
-      <Button
-        id="regiter-button-pf"
-        label="Cadastrar"
-        onClick={() => handleCreateClient()}
-      />
+      <ContainerButtons>
+        <Button
+          id="regiter-button-pf"
+          label="Cadastrar"
+          onClick={() => handleCreateClient()}
+        />
+        <Link to={"/"}>
+          <ButtonSecondary id="button-register" label="Voltar" />
+        </Link>
+      </ContainerButtons>
     </FullPageNotAuth>
   );
 };
