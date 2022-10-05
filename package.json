@@ -5,6 +5,7 @@
   "dependencies": {
     "@bigheads/core": "^0.3.3",
     "@fontsource/ubuntu": "^4.5.11",
+    "@react-google-maps/api": "^2.13.1",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^13.0.0",
     "@testing-library/user-event": "^13.2.1",
@@ -15,8 +16,10 @@
     "axios": "^0.27.2",
     "cpf-cnpj-validator": "^1.0.3",
     "faker": "^6.6.6",
+    "google-maps-react": "^2.0.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-geocode": "^0.2.3",
     "react-loading-icons": "^1.1.0",
     "react-router-dom": "^6.4.0",
     "react-scripts": "5.0.1",
