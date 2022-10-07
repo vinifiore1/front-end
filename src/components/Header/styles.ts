@@ -51,3 +51,5 @@ export const ProfilePictureHeader = styled.div`
 `;
 
 export const ProfileIconHeader = styled.div``;
+
+export const TextProfilePicture = styled.span``;

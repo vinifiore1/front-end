@@ -7,6 +7,7 @@ import { ButtonRegisterIcon } from "../../img/icones/ButtonRegisterIcon";
 
 import {
   AddressContainer,
+  ButtonCancelDashBoard,
   CardContainerInfoDashBoard,
   CardImageDashBoard,
   CardNameDashBoard,
@@ -19,6 +20,7 @@ import {
   ContainerTextSecondary,
   ContainerWrapper,
   DashBoardContainer,
+  MapContainerDashboard,
   PrimaryContainer,
   SecondaryContainer,
   TableDashBoard,
@@ -41,6 +43,7 @@ import { GoogleMap, LoadScript, MarkerF } from "@react-google-maps/api";
 import axios from "axios";
 import { IconCancel } from "../../img/icones/IconCancel";
 import { IconLocalization } from "../../img/icones/IconLocalization";
+import { toast } from "react-toastify";
 
 const DashBoard = () => {
   const token = sessionStorage.getItem("token");
@@ -95,16 +98,33 @@ const DashBoard = () => {
     });
   };
 
+  const handleCancelSchedules = async (value: string) => {
+    await axios
+      .put(
+        `https://api-de-agenda.herokuapp.com/cancelar-reserva/${value}`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then(() => {
+        toast.success("Agendamento cancelado com sucesso");
+      });
+  };
+
   useEffect(() => {
     const filteredHistory: any[] = [];
     if (schedulle && services) {
       schedulle.map((result) => {
         services.filter((item) => {
-          if (item._id === result.servico) {
+          if (item._id === result.servico && result.status !== "CANCELADO") {
             filteredHistory.push({
               tipo: item.tipo,
               data_servico: result.data_servico,
               hora_servico: result.hora_servico,
+              id: result._id,
             });
           }
         });
@@ -118,6 +138,7 @@ const DashBoard = () => {
     getAllServices();
     getAllScheduling();
   }, []);
+
   return (
     <FullPageMain loading={loading}>
       <DashBoardContainer>
@@ -180,7 +201,11 @@ const DashBoard = () => {
                             </TColumnDashboard>
                             <TColumnDashboard>Clinica Geral</TColumnDashboard>
                             <TColumnDashboardIcon>
-                              <IconCancel />
+                              <ButtonCancelDashBoard
+                                onClick={() => handleCancelSchedules(item.id)}
+                              >
+                                <IconCancel />
+                              </ButtonCancelDashBoard>
                             </TColumnDashboardIcon>
                           </TRowDashboard>
                         );
@@ -213,21 +238,23 @@ const DashBoard = () => {
                         </AddressContainer>
                       </TextContainer>
                     </TextAddressContainer>
-                    <LoadScript
-                      onLoad={() => setLoading(false)}
-                      googleMapsApiKey="AIzaSyCX3otK-A-WOv-79eEmz3QdteBKaVNU4Kg"
-                    >
-                      <GoogleMap
-                        center={position}
-                        zoom={14}
-                        mapContainerStyle={containerStyle}
+                    <MapContainerDashboard>
+                      <LoadScript
+                        onLoad={() => setLoading(false)}
+                        googleMapsApiKey="AIzaSyCX3otK-A-WOv-79eEmz3QdteBKaVNU4Kg"
                       >
-                        <MarkerF position={position} />
-                        <MarkerF
-                          position={{ lat: -23.1976832, lng: -49.3822079 }}
-                        />
-                      </GoogleMap>
-                    </LoadScript>
+                        <GoogleMap
+                          center={position}
+                          zoom={14}
+                          mapContainerStyle={containerStyle}
+                        >
+                          <MarkerF position={position} />
+                          <MarkerF
+                            position={{ lat: -23.1976832, lng: -49.3822079 }}
+                          />
+                        </GoogleMap>
+                      </LoadScript>
+                    </MapContainerDashboard>
                   </ContainerMapText>
                 </ContainerTextSecondary>
               </ContainerPadding>

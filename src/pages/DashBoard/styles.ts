@@ -242,3 +242,15 @@ export const TColumnDashboardIcon = styled.td`
   align-items: center;
   justify-content: center;
 `;
+
+export const ButtonCancelDashBoard = styled.button`
+  background: none;
+  border: none;
+  cursor: pointer;
+`;
+
+export const MapContainerDashboard = styled.div`
+  position: relative;
+  top: -20px;
+  left: 20px;
+`;
