@@ -12,14 +12,7 @@ import {
 } from "./styles";
 
 export const Header = () => {
-  const [userInfo, setUserInfo] = useState<any>();
-  const user = sessionStorage.getItem("user");
-  useEffect(() => {
-    if (user) {
-      setUserInfo(JSON.parse(user));
-    }
-  }, [user]);
-
+  const userInfo: any = JSON.parse(String(sessionStorage.getItem("user")));
   return (
     <HeaderContainerMain>
       <TitleContainer>

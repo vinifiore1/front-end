@@ -52,4 +52,13 @@ export const ProfilePictureHeader = styled.div`
 
 export const ProfileIconHeader = styled.div``;
 
-export const TextProfilePicture = styled.span``;
+export const TextProfilePicture = styled.span`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  font-size: 23px;
+  color: #ffffff;
+  font-family: "Ubuntu";
+`;
