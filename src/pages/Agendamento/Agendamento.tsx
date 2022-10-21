@@ -7,6 +7,7 @@ import {
   OptionSchedulle,
   SelectContainer,
   SelectSchedulle,
+  TextFormSchedulle,
   TextSelect,
 } from "./styles";
 import DatePicker, { registerLocale } from "react-datepicker";
@@ -52,25 +53,32 @@ const Agendamento = () => {
     setExistsDate(scheduleOpen);
   };
 
-  useEffect(() => {
-    getAllServices();
-  }, []);
-
   const getExcludedTimes = (date: any) => {
     let arrExcludedTimes = [];
-    for (let i = 0; i < existsDate.length; i++) {
-      arrExcludedTimes.push(
-        setHours(
-          setMinutes(new Date(), existsDate[i].hora_servico.slice(3, 5)),
-          existsDate[i].hora_servico.slice(0, 2)
-        )
-      );
 
+    for (let i = 0; i < existsDate.length; i++) {
+      const formatDate = moment(new Date(existsDate[i].data_servico)).format(
+        "DD-MM-YYYY"
+      );
+      const selectedDate = moment(date).format("DD-MM-YYYY");
+      if (selectedDate === formatDate) {
+        arrExcludedTimes.push(
+          new Date(
+            Number(formatDate.slice(6, 10)),
+            Number(formatDate.slice(3, 5)),
+            Number(formatDate.slice(0, 2)),
+            existsDate[i].hora_servico.slice(0, 2),
+            existsDate[i].hora_servico.slice(3, 5)
+          )
+        );
+      }
       setExcludedTimes(arrExcludedTimes);
     }
   };
 
-  console.log(date, serviceHour);
+  useEffect(() => {
+    getAllServices();
+  }, []);
 
   return (
     <FullPageMain>
@@ -93,6 +101,7 @@ const Agendamento = () => {
           </SelectSchedulle>
         </SelectContainer>
         <InputContainerSchedulle>
+          <TextFormSchedulle>Selecione a data desejada:</TextFormSchedulle>
           <DatePicker
             locale={"pt"}
             onChange={(e) => setDate(e)}
@@ -100,7 +109,9 @@ const Agendamento = () => {
             selected={date}
             minDate={new Date()}
             dateFormat=" dd/MM/yyyy"
+            placeholderText="dd/mm/aaaa"
           />
+          <TextFormSchedulle>Selecione a hora desejada:</TextFormSchedulle>
           <DatePicker
             excludeTimes={excludedTimes}
             onChange={(e) => setServiceHour(e)}
@@ -108,11 +119,13 @@ const Agendamento = () => {
             popperPlacement="top-start"
             showTimeSelect
             showTimeSelectOnly
-            value=""
+            selected={serviceHour}
             timeIntervals={15}
             timeFormat="HH:mm"
+            dateFormat="hh:mm aa"
             minTime={setHours(setMinutes(new Date(), 0), 8)}
             maxTime={setHours(setMinutes(new Date(), 0), 18)}
+            placeholderText="hh/mm"
           />
         </InputContainerSchedulle>
       </FormContainer>

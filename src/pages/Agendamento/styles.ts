@@ -30,19 +30,16 @@ export const SelectSchedulle = styled.select`
   background: none;
   border: 1px solid #c4c4c4;
   border-radius: 3px;
-`;
-
-export const OptionSchedulle = styled.option`
   font-family: "Ubuntu";
   font-style: normal;
-  font-weight: 400;
-  font-size: 13px;
-  line-height: 15px;
-  display: flex;
-  align-items: center;
-  text-align: center;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 18px;
   color: #354f52;
+  padding: 10px;
 `;
+
+export const OptionSchedulle = styled.option``;
 
 export const TextSelect = styled.span`
   font-family: "Ubuntu";
@@ -55,6 +52,7 @@ export const TextSelect = styled.span`
 
 export const InputContainerSchedulle = styled.div`
   display: flex;
+  flex-direction: column;
   width: 100%;
   justify-content: space-between;
   grid-gap: 20px;
@@ -71,3 +69,12 @@ export const InputContainerSchedulle = styled.div`
 `;
 
 export const DateInputSchedulle = styled.input``;
+
+export const TextFormSchedulle = styled.span`
+  font-family: "Ubuntu";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 18px;
+  color: #354f52;
+`;
