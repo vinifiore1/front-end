@@ -14,7 +14,6 @@ export const FullPageMain = (props: IPropsFullPage) => {
   return (
     <>
       <Header />
-
       <FullPageContainer>
         <SideBarContainerChildren>
           <SideBar />

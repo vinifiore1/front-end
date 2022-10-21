@@ -4,7 +4,6 @@ import Avatar from "../../components/Avatar/Avatar";
 import ButtonRegister from "../../components/ButtonRegister/ButtonRegister";
 import { FullPageMain } from "../../components/FullPageMain/FullPageMain";
 import { ButtonRegisterIcon } from "../../img/icones/ButtonRegisterIcon";
-
 import {
   AddressContainer,
   ButtonCancelDashBoard,
@@ -94,6 +93,7 @@ const DashBoard = () => {
         lat: position.coords.latitude,
         lng: position.coords.longitude,
       });
+
       setLoading(false);
     });
   };
