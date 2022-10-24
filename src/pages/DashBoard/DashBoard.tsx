@@ -127,7 +127,9 @@ const DashBoard = () => {
               id: result._id,
             });
           }
+          return filteredHistory;
         });
+        return filteredHistory;
       });
       setHistory(filteredHistory);
     }

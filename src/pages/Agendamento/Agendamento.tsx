@@ -2,11 +2,19 @@ import { useEffect, useState } from "react";
 import { connect } from "../../api/connect";
 import { FullPageMain } from "../../components/FullPageMain/FullPageMain";
 import {
+  ButtonContainerScheddule,
+  ButtonsContainer,
+  CancelButton,
+  ContainerSchedulle,
   FormContainer,
   InputContainerSchedulle,
   OptionSchedulle,
   SelectContainer,
   SelectSchedulle,
+  TextContainerBold,
+  TextContainerRegular,
+  TextContainerSchedulle,
+  TextContainerSub,
   TextFormSchedulle,
   TextSelect,
 } from "./styles";
@@ -16,16 +24,21 @@ import setMinutes from "date-fns/setMinutes";
 import "react-datepicker/dist/react-datepicker.css";
 import pt from "date-fns/locale/pt-BR";
 import moment from "moment";
+
 registerLocale("pt", pt);
 
 const Agendamento = () => {
   const token = sessionStorage.getItem("token");
   const [services, setServices] = useState<any>([]);
-  const [scheduling, setScheduling] = useState<any>({});
+  const [service, setService] = useState<any>([]);
   const [date, setDate] = useState<any>();
   const [excludedTimes, setExcludedTimes] = useState<any[]>();
   const [existsDate, setExistsDate] = useState<any[]>([]);
   const [serviceHour, setServiceHour] = useState<any>();
+  const [funcionario, setFuncionario] = useState<any>({});
+  const user = sessionStorage.getItem("user");
+  const userJson = JSON.parse(user ? user : "");
+  const [showLoader, setShowLoader] = useState(false);
 
   const getAllServices = async () => {
     const allServices = await connect("servico", "get", {
@@ -50,6 +63,17 @@ const Agendamento = () => {
         userid: infoService.funcionario,
       },
     });
+    const funcionario = await connect(
+      `funcionario/${infoService.funcionario}`,
+      "get",
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    setService(infoService);
+    setFuncionario(funcionario);
     setExistsDate(scheduleOpen);
   };
 
@@ -76,12 +100,39 @@ const Agendamento = () => {
     }
   };
 
+  const doSchedulle = async () => {
+    setShowLoader(true);
+    const newSchedulle = await connect(
+      "reserva",
+      "post",
+      {
+        tipo: "1",
+        funcionario: service.funcionario,
+        userId: userJson._id,
+        servico: service._id,
+        data_servico: date,
+        hora_servico: moment(new Date(serviceHour)).format("HH:mm"),
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    if (newSchedulle) {
+      setShowLoader(false);
+      setDate("");
+      setServiceHour("");
+    }
+  };
+
   useEffect(() => {
     getAllServices();
   }, []);
 
   return (
-    <FullPageMain>
+    <FullPageMain loading={showLoader}>
       <FormContainer>
         <SelectContainer>
           <TextSelect>Agendamento para: </TextSelect>
@@ -125,10 +176,64 @@ const Agendamento = () => {
             dateFormat="hh:mm aa"
             minTime={setHours(setMinutes(new Date(), 0), 8)}
             maxTime={setHours(setMinutes(new Date(), 0), 18)}
-            placeholderText="hh/mm"
+            placeholderText="hh:mm"
           />
         </InputContainerSchedulle>
       </FormContainer>
+      <ContainerSchedulle>
+        <TextContainerSchedulle>Dados do paciente</TextContainerSchedulle>
+        <TextContainerSub>
+          <TextContainerBold>Nome:</TextContainerBold>
+          <TextContainerRegular>{userJson.nome}</TextContainerRegular>
+        </TextContainerSub>
+        <TextContainerSub>
+          <TextContainerBold>Telefone:</TextContainerBold>
+          <TextContainerRegular>{userJson.telefone}</TextContainerRegular>
+        </TextContainerSub>
+        <div style={{ marginBottom: "30px" }}></div>
+        <TextContainerSchedulle>Dados da consulta</TextContainerSchedulle>
+        {date && (
+          <TextContainerSub>
+            <TextContainerBold>Data:</TextContainerBold>
+            <TextContainerRegular>
+              {moment(new Date(date)).format("DD/MM/YYYY")}
+            </TextContainerRegular>
+          </TextContainerSub>
+        )}
+        {serviceHour && (
+          <TextContainerSub>
+            <TextContainerBold>Hora:</TextContainerBold>
+            <TextContainerRegular>
+              {moment(new Date(serviceHour)).format("HH:mm")}
+            </TextContainerRegular>
+          </TextContainerSub>
+        )}
+        <div style={{ marginBottom: "30px" }}></div>
+        <TextContainerSchedulle>Dados do pagamento</TextContainerSchedulle>
+        {funcionario.pix !== undefined && (
+          <TextContainerSub>
+            <TextContainerBold>Pix:</TextContainerBold>
+            <TextContainerRegular>{funcionario.pix}</TextContainerRegular>
+          </TextContainerSub>
+        )}
+        <ButtonsContainer>
+          <CancelButton
+            onClick={() => {
+              setShowLoader(false);
+              setDate("");
+              setServiceHour("");
+            }}
+          >
+            Cancelar
+          </CancelButton>
+          <ButtonContainerScheddule
+            onClick={doSchedulle}
+            disabled={!date || !serviceHour || !funcionario || !service}
+          >
+            Finalizar agendamento
+          </ButtonContainerScheddule>
+        </ButtonsContainer>
+      </ContainerSchedulle>
     </FullPageMain>
   );
 };

@@ -4,11 +4,11 @@ export const connect = async (
   value: string,
   method: string,
   body?: object,
-  token?: string
+  token?: object
 ) => {
   if (method === "post") {
     return await axios
-      .post(`https://api-de-agenda.herokuapp.com/${value}`, body)
+      .post(`https://api-de-agenda.herokuapp.com/${value}`, body, token)
       .then((result) => {
         return result.data;
       })

@@ -1,5 +1,9 @@
 import styled from "styled-components";
 
+interface IPropsButton {
+  disabled?: boolean;
+}
+
 export const LogoContainerHome = styled.div`
   display: flex;
   align-items: center;
@@ -77,4 +81,84 @@ export const TextFormSchedulle = styled.span`
   font-size: 16px;
   line-height: 18px;
   color: #354f52;
+`;
+
+export const ContainerSchedulle = styled.div`
+  background: #efefef;
+  border-radius: 5px;
+  width: 428px;
+  height: 500px;
+  display: flex;
+  margin-left: 30px;
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+`;
+
+export const TextContainerSchedulle = styled.span`
+  font-family: "Ubuntu";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 28px;
+  color: #354f52;
+  border-bottom: 1px solid #c4c4c4;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+`;
+
+export const TextContainerRegular = styled.span`
+  font-family: "Ubuntu";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 16px;
+  color: #354f52;
+`;
+
+export const TextContainerBold = styled.span`
+  font-family: "Ubuntu";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  color: #354f52;
+`;
+
+export const TextContainerSub = styled.div`
+  display: flex;
+  grid-gap: 10px;
+  padding-bottom: 10px;
+`;
+
+export const ButtonsContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  grid-gap: 50px;
+  height: 100%;
+`;
+
+export const ButtonContainerScheddule = styled.button<IPropsButton>`
+  background: ${(props) => (props.disabled ? "#ccc" : "#52796f")};
+  border-radius: 3px;
+  border: none;
+  color: white;
+  font-family: "Ubuntu";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  padding: 20px;
+  cursor: ${(props) => (props.disabled ? "" : "pointer")};
+`;
+
+export const CancelButton = styled.button`
+  font-family: "Ubuntu";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 18px;
+  background: none;
+  border: none;
+  color: #9d0208;
+  cursor: pointer;
 `;
