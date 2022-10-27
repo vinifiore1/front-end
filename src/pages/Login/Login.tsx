@@ -31,6 +31,10 @@ export default function Login() {
   const handleLogin = async () => {
     const body = { cpf: username, senha: password };
     setLoading(true);
+    sessionStorage.setItem("token", "");
+    sessionStorage.setItem("user", "");
+    sessionStorage.setItem("role", "");
+    sessionStorage.setItem("page", "");
 
     if (body.cpf !== "" && body.senha !== "") {
       const clientConnect = await connect("autenticacao-cliente", "post", body);
@@ -47,7 +51,10 @@ export default function Login() {
         } else {
           setLoading(false);
           sessionStorage.setItem("token", businessConnect.token);
-          sessionStorage.setItem("user", businessConnect);
+          sessionStorage.setItem(
+            "user",
+            JSON.stringify(businessConnect.usuario)
+          );
           sessionStorage.setItem("role", businessConnect.role);
           sessionStorage.setItem("page", "Dashboard");
           window.location.assign("/home");

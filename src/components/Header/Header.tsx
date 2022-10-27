@@ -18,6 +18,7 @@ import {
 
 export const Header = () => {
   const [showModal, setShowModal] = useState(false);
+
   const userInfo: any = JSON.parse(String(sessionStorage.getItem("user")));
 
   const doLogout = () => {

@@ -33,30 +33,9 @@ export const SideBar = () => {
     },
     {
       id: "test-sidebar",
-      icon: <ClientIcon />,
-      main: "Clientes",
-      route: "/agendamento",
-      role: ["ROLE_ADMIN"],
-    },
-    {
-      id: "test-sidebar",
-      icon: <EmployeeIcon />,
-      main: "Colaboradores",
-      route: "/agendamento",
-      role: ["ROLE_ADMIN"],
-    },
-    {
-      id: "test-sidebar",
       icon: <ServicesIcon />,
       main: "Serviços",
-      route: "/agendamento",
-      role: ["ROLE_ADMIN"],
-    },
-    {
-      id: "test-sidebar",
-      icon: <HourIcon />,
-      main: "Horarios",
-      route: "/agendamento",
+      route: "/services",
       role: ["ROLE_ADMIN"],
     },
   ];

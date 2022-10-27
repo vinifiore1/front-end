@@ -5,6 +5,7 @@ import DashBoard from "./pages/DashBoard/DashBoard";
 import Login from "./pages/Login/Login";
 import RegisterSuccess from "./pages/Register/Register/RegisterSucess";
 import RegisterMain from "./pages/Register/RegisterMain";
+import Services from "./pages/Services/Services";
 
 const AppRouter = [
   {
@@ -28,6 +29,11 @@ const AppRouter = [
   {
     main: <Agendamento />,
     path: "/agendamento",
+    auth: true,
+  },
+  {
+    main: <Services />,
+    path: "/services",
     auth: true,
   },
 ];
