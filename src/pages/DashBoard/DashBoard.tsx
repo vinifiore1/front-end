@@ -159,7 +159,7 @@ const DashBoard = () => {
                   <CardContainerInfoDashBoard>
                     <CardNameDashBoard>{item.tipo}</CardNameDashBoard>
                     <CardPriceDashboard>
-                      {item.price} • Consulta
+                      {item.price} • {item.time ? item.time : "Consulta"}
                     </CardPriceDashboard>
                   </CardContainerInfoDashBoard>
                   <ButtonRegister

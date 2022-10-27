@@ -25,7 +25,7 @@ interface IAdminInputProps {
   isRequired?: boolean;
   endAdornment?: ReactNode;
   bottomAdornment?: ReactNode;
-  type?: "text" | "email" | "tel" | "number" | "password" | "date";
+  type?: "text" | "email" | "tel" | "number" | "password" | "date" | "time";
   onChange?: (value?: any) => void;
   onBlur?: (value?: any) => void;
   onFocus?: (value?: any) => void;
