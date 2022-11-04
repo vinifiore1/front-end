@@ -3,6 +3,7 @@ import { ClientIcon } from "../../img/icones/ClientIcon";
 import { DashBoardIcon } from "../../img/icones/DashBoardIcon";
 import { EmployeeIcon } from "../../img/icones/EmployeeIcon";
 import { HourIcon } from "../../img/icones/HourIcon";
+import { OpenHourIcon } from "../../img/icones/OpenHouIcon";
 import { ServicesIcon } from "../../img/icones/ServicesIcon";
 import {
   IconContainer,
@@ -36,6 +37,13 @@ export const SideBar = () => {
       icon: <ServicesIcon />,
       main: "Serviços",
       route: "/services",
+      role: ["ROLE_ADMIN"],
+    },
+    {
+      id: "test-sidebar",
+      icon: <OpenHourIcon />,
+      main: "Horários Abertos",
+      route: "/horarios-abertos",
       role: ["ROLE_ADMIN"],
     },
   ];

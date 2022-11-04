@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import { ProtectedRoute } from "./auth";
 import Agendamento from "./pages/Agendamento/Agendamento";
 import DashBoard from "./pages/DashBoard/DashBoard";
+import Horarios from "./pages/Horarios/Horarios";
 import Login from "./pages/Login/Login";
 import RegisterSuccess from "./pages/Register/Register/RegisterSucess";
 import RegisterMain from "./pages/Register/RegisterMain";
@@ -34,6 +35,11 @@ const AppRouter = [
   {
     main: <Services />,
     path: "/services",
+    auth: true,
+  },
+  {
+    main: <Horarios />,
+    path: "/horarios-abertos",
     auth: true,
   },
 ];
