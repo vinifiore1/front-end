@@ -59,7 +59,7 @@ const Services = () => {
       {
         funcionario: servicesInfo.funcionario,
         time: servicesInfo.time,
-        price: servicesInfo.price,
+        price: time === "time" ? servicesInfo.price : "",
         tipo: servicesInfo.tipo,
       },
       {
@@ -137,9 +137,11 @@ const Services = () => {
               <Input
                 id="time"
                 label="Digite a duração do serviço:"
-                onChange={(e) => setServiceTime(e.target.value)}
+                onChange={(e) =>
+                  setServicesInfo({ ...servicesInfo, time: e.target.value })
+                }
                 placeholder={"duração do serviço em horas"}
-                value={serviceTime}
+                value={servicesInfo.time}
               />
             )}
             <Input
