@@ -165,6 +165,7 @@ const DashBoard = () => {
                   <ButtonRegister
                     icon={<ButtonRegisterIcon />}
                     label={"Agendar"}
+                    onClick={() => window.location.assign("/agendamento")}
                   />
                 </CardServiceDashBoard>
               ))}

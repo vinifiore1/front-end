@@ -8,11 +8,12 @@ import {
 interface IPropsButtonRegister {
   label: string;
   icon: ReactNode;
+  onClick?: () => void;
 }
 
 const ButtonRegister = (props: IPropsButtonRegister) => {
   return (
-    <ButtonRegisterContainer>
+    <ButtonRegisterContainer onClick={props.onClick}>
       <ButtonRegisterIconContainer>{props.icon}</ButtonRegisterIconContainer>
       <ButtonRegisterLabelContainer>{props.label}</ButtonRegisterLabelContainer>
     </ButtonRegisterContainer>
