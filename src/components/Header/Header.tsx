@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IconShowProfile } from "../../img/icones/IconShowProfile";
 
 import { ButtonSecondary } from "../ButtonSecondary/ButtonSecondary";
@@ -19,7 +19,9 @@ import {
 export const Header = () => {
   const [showModal, setShowModal] = useState(false);
 
-  const userInfo: any = JSON.parse(String(sessionStorage.getItem("user")));
+  const [userInfo, setUserInfo] = useState<any>(
+    JSON.parse(String(sessionStorage.getItem("user")))
+  );
 
   const doLogout = () => {
     sessionStorage.setItem("token", "");
@@ -28,6 +30,7 @@ export const Header = () => {
     sessionStorage.setItem("page", "");
     window.location.assign("/");
   };
+
   return (
     <HeaderContainerMain>
       <TitleContainer>

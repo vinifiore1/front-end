@@ -8,7 +8,7 @@ export const connect = async (
 ) => {
   if (method === "post") {
     return await axios
-      .post(`https://api-de-agenda.herokuapp.com/${value}`, body, token)
+      .post(`https://api-agenda.herokuapp.com/${value}`, body, token)
       .then((result) => {
         return result.data;
       })
@@ -17,7 +17,7 @@ export const connect = async (
       });
   } else if (method === "get") {
     return await axios
-      .get(`https://api-de-agenda.herokuapp.com/${value}`, body)
+      .get(`https://api-agenda.herokuapp.com/${value}`, body)
       .then((result) => {
         return result.data;
       })
